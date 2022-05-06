@@ -1,11 +1,16 @@
 const add = (a, b) => a + b;
-console.log(add(2, 5));
 
 const subtract = (a, b) => a - b;
-console.log(subtract(2,5));
 
 const multiply = (a, b) => a * b;
-console.log(multiply(2,5));
 
 const divide = (a, b) => a / b;
-console.log(divide(2, 5));
+
+function operate(sum, a, b) {
+    if (sum === add) return add(a, b);
+    if (sum === subtract) return subtract(a, b);
+    if (sum === multiply) return multiply(a, b);
+    if (sum === divide) return divide(a, b);
+}
+
+console.log(operate(add, 2, 5));
