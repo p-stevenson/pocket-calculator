@@ -1,6 +1,6 @@
 * {
     border: solid 5px black;
-    background-color: rgba(168, 161, 161, 0);
+    background-color: rgba(168, 161, 161, 1);
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0px;
@@ -10,7 +10,6 @@
 
 html {
     border: none;
-    z-index: -10;
 }
 
 body {
@@ -19,29 +18,64 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: -9;
+}
+
+.outerContainer {
+    border: none;
+    max-width: 515px;
+    max-height: 875px;
+    width: 100%;
+    height: 100%;
 }
 
 .container {
-    border-color: yellow;
-    display: flex;
-    flex-direction: column;
-    flex: 0 1 auto;
-    z-index: 2;
+    border: 1px solid black;
+    border-radius: 40px;
+    background-color: silver;
+    display: grid;
+/*     background-image: url(images/SL-305ECO_EDIT2.png);
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position:center; */
+    grid-template-rows: 1fr 62%;
+    height: 100%;
+    padding: 10px;
 }
 
-#calc {
-    border-color: rgb(68, 39, 201);
-    z-index: 5;
+.item2 {
+    border: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) ;
+    grid-template-rows: 10% repeat(5, 1fr);
+    justify-items: space-around;
+    gap: .7em;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 35px;
+    padding: .7rem;
 }
 
-#calcScreenBackground {
-    border-color: hotpink;
-    background-color: rgb(170, 189, 177);
-    z-index: 4;
-    position: absolute;
-    top: 600;
-    left: 500;
-    height: 600px;
-    width: 600px;
+.itm {
+    border: 4px solid black;
+    border-radius: 10px 10px 20px 20px;
+    background-color: rgb(225, 227, 230);
+    box-shadow: 0 3px .1rem rgba(0, 0, 0, 0.8);
 }
+.itm1 {
+    grid-column: 4;
+}
+
+.itm1, .itm2 {
+    background-color: rgb(83, 197, 193);
+}
+
+.itm22 {
+    grid-row: span 2;
+}
+
+.itm18, .itm23 {
+    background-color: rgb(231, 99, 172);
+}
+
+/* .item {
+    background-color: rgba(168, 161, 161, 0);
+} */
