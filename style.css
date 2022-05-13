@@ -1,3 +1,7 @@
+@font-face {
+    font-family: digital7;
+    src: url(fonts/digital-7/digital-7.ttf);
+}
 * {
     border: solid 5px black;
     background-color: rgba(168, 161, 161, 1);
@@ -24,40 +28,44 @@ body {
     border: 3px solid black;
     border-radius: 40px;
     background-color: silver;
+    box-shadow: 0 3px .5rem rgba(66, 66, 66, 0.844);
     display: grid;
-/*     background-image: url(images/SL-305ECO_EDIT2.png);
-    background-repeat:no-repeat;
-    background-size: cover;
-    background-position:center; */
     grid-template-rows: 1fr 62%;
-    height: 100%;
-    padding: 10px;
-    max-width: 515px;
     max-height: 875px;
+    max-width: 515px;
+    height: 100%;
     width: 100%;
-    box-shadow: 0 3px /* .1rem */ rgba(66, 66, 66, 0.644);
+    padding: 10px;
 }
 
 .keypad {
     border: none;
+    background: none;
     display: grid;
     grid-template-columns: repeat(5, 1fr) ;
     grid-template-rows: 10% repeat(5, 1fr);
     justify-items: space-around;
     gap: 1em;
-    background-color: rgba(0, 0, 0, 0);
-    border-radius: 35px;
     padding: .7rem;
 }
 
+.keypad #modelNo {
+    border: none;
+    background: none;
+    grid-column: span 2;
+    justify-self: center;
+    align-self: center;
+    font-family: 'Michroma', sans-serif;
+    font-weight: bold;
+    font-size: 1.5vh;
+}
 .button {
-    border: 4px solid black;
+    border: .35vh solid black;
     border-radius: 10px 10px 20px 20px;
     background-color: rgb(225, 227, 230);
     box-shadow: 0 3px /* .1rem */ rgba(66, 66, 66, 0.644);
     font-family: 'Open Sans', sans-serif;
-    /* font-weight: bold; */
-    font-size: 2.5rem;
+    font-size: 2.5vh;
 }
 
 .button:active {
@@ -72,11 +80,11 @@ body {
 
 .button1, .button2 {
     background-color: rgb(83, 197, 193);
-    font-size: 1.8rem;
+    font-size: 2.3vh;
 }
 
 .button3, .button8 {
-    font-size: 1.6rem;
+    font-size: 2.2vh;
 }
 
 .button18, .button23 {
@@ -85,6 +93,83 @@ body {
 
 .button22 {
     grid-row: span 2;
+}
+
+.panels {
+    border: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 3fr;
+    background-color: silver;
+}
+
+.panels #logo {
+    border: none;
+    background: none;
+    font-family: 'Michroma', sans-serif;
+    font-weight: bold;
+    font-size: 2.3vh;
+    grid-column: span 2;
+    justify-self: start;
+    align-self: center;
+    margin: 0 0 0 12%;
+}
+
+.solar {
+    border: 5px double;
+    border-radius: 3%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column: 3 / span 2;
+    height: 4vh;
+    align-self: center;
+    margin: 0% 10% 0% 8%;
+}
+
+.solarPanel {
+    border: none;
+    outline: solid rgba(218, 165, 32, 0.226);
+    background-color: rgb(72, 30, 11);
+}
+
+.main {
+    border: solid black 2px;
+    border-radius: 20px;
+    grid-row: 2;
+    grid-column: span 4;
+    flex: 2 1 auto;
+    display: flex;
+    margin: 2%;
+}
+
+.mainDisplay {
+    display: grid;
+    border: 5px double;
+    border-radius: 20px;
+    background-color: rgb(170,189,177);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 20% 1fr;
+    margin: 3%;
+    flex: 1 1 auto;
+}
+.screen1, .screen2, .screen3, .screen4 {
+    border: none;
+    background: none;
+}
+
+.screen4 {
+    grid-column: span 2;
+}
+.screen5 {
+    border: none;
+    background: none;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-family: 'digital7';
+    font-size: 9vh;
+    justify-self: end;
+    align-self: center;
+    padding-right: 2%;
 }
 
 /* .item {
