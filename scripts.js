@@ -1,43 +1,33 @@
-let a;
-let b;
-let c;
-let firstOperatorType;
-let secondOperatorType;
+let a = 0;
+let b = 0;
+let c = 0;
+let firstOperator;
+let secondOperator;
 
 const display = document.querySelector('.screen5');
 const topDisplay = document.querySelector('.screen4');
-const errorDisplay = document.querySelector('.screen1');
-const numberKeys = document.querySelectorAll('.numeral');
 const decimalKey = document.querySelector('.decimal');
-const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('.equals');
+const numberKeys = document.querySelectorAll('.numeral');
+const operators = document.querySelectorAll('.operator');
 
-
-
-const add = (a, b) => a + b;
-const subtract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
-
+const operations = {
+    'add':(a, b) => a + b,
+    'subtract':(a, b) => a - b,
+    'multiply':(a, b) => a * b,
+    'divide':(a, b) => a / b,
+}
 
 function clearButton() {
     numberKeys.forEach((key) => {
         key.removeEventListener('click', storeA, false)
-    });
-    numberKeys.forEach((key) => {
         key.removeEventListener('click', storeB, false)
-    });
-    numberKeys.forEach((key) => {
-        key.removeEventListener('click', storeNewB, false)
+        key.removeEventListener('click', storeNextB, false)
     });
     operators.forEach((operator) => {
-        operator.removeEventListener('click', storeFirstOperatorType, false);
-    });
-    operators.forEach((operator) => {
-        operator.removeEventListener('click', storeSecondOperatorType, false);
-    });
-    operators.forEach((operator) => {
-        operator.removeEventListener('click', storeFinalOperatorType, false);
+        operator.removeEventListener('click', storeFirstOperator, false);
+        operator.removeEventListener('click', storeSecondOperator, false);
+        operator.removeEventListener('click', storeNextOperator, false);
     });
     document.querySelector('.clear').addEventListener('click', clear, false);
 }
@@ -46,11 +36,10 @@ function clear() {
     a = 0;
     b = 0;
     c = 0;
-    firstOperatorType = '';
-    secondOperatorType = '';
+    firstOperator = '';
+    secondOperator = '';
     display.textContent = '';
     topDisplay.textContent = '';
-    errorDisplay.textContent = '';
     document.querySelector('.clear').removeEventListener('click', clear, false);
     clearButton();
     listenForA();
@@ -77,23 +66,23 @@ function storeA() {
 
 function listenForFirstOperator() {
     operators.forEach((operator) => {
-        operator.addEventListener('click', storeFirstOperatorType, false);
+        operator.addEventListener('click', storeFirstOperator, false);
     });
 }
 
-function storeFirstOperatorType() {
+function storeFirstOperator() {
     numberKeys.forEach((key) => {
         key.removeEventListener('click', storeA, false)
     });
     clearScreen();
     topDisplay.textContent = `${a} ${this.textContent}`;
-    firstOperatorType = this.value;
+    firstOperator = this.value;
     listenForB();
 }
 
 function listenForB() {
     operators.forEach((operator) => {
-        operator.removeEventListener('click', storeFirstOperatorType, false);
+        operator.removeEventListener('click', storeFirstOperator, false);
     });
     numberKeys.forEach((key) => {
         key.addEventListener('click', storeB, false);
@@ -110,67 +99,47 @@ function storeB() {
 
 function listenForSecondOperator() {
     operators.forEach((operator) => {
-        operator.addEventListener('click', storeSecondOperatorType, false);
+        operator.addEventListener('click', storeSecondOperator, false);
     });
 }
 
-function storeSecondOperatorType() {
+
+function storeSecondOperator() {
     numberKeys.forEach((key) => {
         key.removeEventListener('click', storeB, false);
     });
-    secondOperatorType = this.value;
-    if(firstOperatorType === 'add') {
-        c = add(a, b);
+    secondOperator = this.value;
+    const calculate = operations[firstOperator];
+    if (firstOperator === 'divide' && b === 0) {
+        display.textContent = 'ERROR';
+    } else {
+        c = calculate(a,b);
         display.textContent = c;
-        topDisplay.textContent = `${c} ${this.textContent}`;
+        topDisplay.textContent = `${c} ${this.textContent}`;  
     }
-    if(firstOperatorType === 'subtract') {
-        c = subtract(a, b);
-        display.textContent = c;
-        topDisplay.textContent = `${c} ${this.textContent}`;
-    }
-    if(firstOperatorType === 'multiply') {
-        c = multiply(a, b);
-        display.textContent = c;
-        topDisplay.textContent = `${c} ${this.textContent}`;
-    }
-    if(firstOperatorType === 'divide') {
-        if(b !== 0) {
-            c = divide(a, b);
-            display.textContent = c;
-            topDisplay.textContent = `${c} ${this.textContent}`;  
-        } else {
-            errorDisplay.textContent = 'ERROR';
-        }
-
-    }
-    firstOperatorType = secondOperatorType;
-    listenForNewB();
+    firstOperator = secondOperator;
+    listenForNextB();
 }
 
 //-------------------SECOND OPERATION---------------------//
 
-function listenForNewB() {
+function listenForNextB() {
     operators.forEach((operator) => {
-        operator.removeEventListener('click', storeSecondOperatorType, false);
-    });
-    operators.forEach((operator) => {
-        operator.removeEventListener('click', storeFinalOperatorType, false);
+        operator.removeEventListener('click', storeSecondOperator, false);
+        operator.removeEventListener('click', storeNextOperator, false);
     });
     numberKeys.forEach((key) => {
         key.addEventListener('click', clearScreenAndStopListening, {once:true});
-    });
-    numberKeys.forEach((key) => {
-        key.addEventListener('click', storeNewB, false);
+        key.addEventListener('click', storeNextB, false);
     });
 }
 
-function storeNewB() {
+function storeNextB() {
     if(display.textContent.length < 9) {
         display.textContent += this.value;
         b = Number(display.textContent);
     }
-    listenForFinalOperator();
+    listenForNextOperator();
 }
 
 function clearScreenAndStopListening() {
@@ -180,45 +149,38 @@ function clearScreenAndStopListening() {
     });
 }
 
-function listenForFinalOperator() {
+function listenForNextOperator() {
     operators.forEach((operator) => {
-        operator.addEventListener('click', storeFinalOperatorType, false);
+        operator.addEventListener('click', storeNextOperator, false);
     });
 }
 
-function storeFinalOperatorType() {
+function storeNextOperator() {
     numberKeys.forEach((key) => {
-        key.removeEventListener('click', storeNewB, false);
+        key.removeEventListener('click', storeNextB, false);
     });
-    topDisplay.textContent = this.value;
-    secondOperatorType = this.value;
-    if(firstOperatorType === 'add') {
-        c = add(c, b);
+    secondOperator = this.value;
+    const calculate = operations[firstOperator];
+    if (firstOperator === 'divide' && b === 0) {
+        display.textContent = 'ERROR';
+    } else {
+        c = calculate(c,b);
         display.textContent = c;
         topDisplay.textContent = `${c} ${this.textContent}`;
-        listenForNewB();
+        listenForNextB();  
     }
-    if(firstOperatorType === 'subtract') {
-        c = subtract(c, b);
-        display.textContent = c;
-        topDisplay.textContent = `${c} ${this.textContent}`;
-        listenForNewB();
-    }
-    if(firstOperatorType === 'multiply') {
-        c = multiply(c, b);
-        display.textContent = c;
-        topDisplay.textContent = `${c} ${this.textContent}`;
-        listenForNewB();
-    }
-    if(firstOperatorType === 'divide') {
-        c = divide(c, b);
-        display.textContent = c;
-        topDisplay.textContent = `${c} ${this.textContent}`;
-        listenForNewB();
-    }
-    firstOperatorType = secondOperatorType;
+    firstOperator = secondOperator;
+}
+
+function listenForEquals(){
+    equals.addEventListener('click', doEquals, false);
+}
+
+function doEquals() {
+    topDisplay.textContent = 'equals';
 }
 
 clearButton();
 listenForA();
+listenForEquals();
 
