@@ -1,11 +1,12 @@
-let a = 0;
-let b = 0;
-let c = 0;
+let a = null;
+let b = null;
+let c = null;
 let firstOperator;
 let secondOperator;
 
 const display = document.querySelector('.screen5');
 const topDisplay = document.querySelector('.screen4');
+const errorDisplay = document.querySelector('.screen1');
 const decimalKey = document.querySelector('.decimal');
 const equals = document.querySelector('.equals');
 const numberKeys = document.querySelectorAll('.numeral');
@@ -20,9 +21,9 @@ const operations = {
 
 function clearButton() {
     numberKeys.forEach((key) => {
-        key.removeEventListener('click', storeA, false)
-        key.removeEventListener('click', storeB, false)
-        key.removeEventListener('click', storeNextB, false)
+        key.removeEventListener('click', storeA, false);
+        key.removeEventListener('click', storeB, false);
+        key.removeEventListener('click', storeNextB, false);
     });
     operators.forEach((operator) => {
         operator.removeEventListener('click', storeFirstOperator, false);
@@ -33,13 +34,14 @@ function clearButton() {
 }
 
 function clear() {
-    a = 0;
-    b = 0;
-    c = 0;
+    a = null;
+    b = null;
+    c = null;
     firstOperator = '';
     secondOperator = '';
     display.textContent = '';
     topDisplay.textContent = '';
+    errorDisplay.textContent = '';
     document.querySelector('.clear').removeEventListener('click', clear, false);
     clearButton();
     listenForA();
@@ -108,16 +110,16 @@ function storeSecondOperator() {
     numberKeys.forEach((key) => {
         key.removeEventListener('click', storeB, false);
     });
-    secondOperator = this.value;
-    const calculate = operations[firstOperator];
     if (firstOperator === 'divide' && b === 0) {
         display.textContent = 'ERROR';
     } else {
+        secondOperator = this.value;
+        const calculate = operations[firstOperator];
         c = calculate(a,b);
         display.textContent = c;
         topDisplay.textContent = `${c} ${this.textContent}`;  
+        firstOperator = secondOperator;
     }
-    firstOperator = secondOperator;
     listenForNextB();
 }
 
@@ -159,17 +161,37 @@ function storeNextOperator() {
     numberKeys.forEach((key) => {
         key.removeEventListener('click', storeNextB, false);
     });
-    secondOperator = this.value;
-    const calculate = operations[firstOperator];
     if (firstOperator === 'divide' && b === 0) {
         display.textContent = 'ERROR';
-    } else {
+    }
+    else {
+        secondOperator = this.value;
+        const calculate = operations[firstOperator];
         c = calculate(c,b);
         display.textContent = c;
         topDisplay.textContent = `${c} ${this.textContent}`;
+        firstOperator = secondOperator;
         listenForNextB();  
     }
-    firstOperator = secondOperator;
+}
+
+//------------------- EQUALS ---------------------//
+// the listenForOperator and storeOperator functions 
+// below are a temporary fix to avoid calling the previous 
+// storeOperation functions, without it attempting 
+// a new calculation after calling doEquals for the 
+// second time results in a double calculation.
+
+function listenForOperator() {
+    operators.forEach((operator) => {
+        operator.addEventListener('click', storeOperator, false);
+    });
+}
+
+function storeOperator() {
+    firstOperator = this.value;
+    topDisplay.textContent = `${c} ${this.textContent}`;
+    listenForNextB();
 }
 
 function listenForEquals(){
@@ -177,7 +199,41 @@ function listenForEquals(){
 }
 
 function doEquals() {
-    topDisplay.textContent = 'equals';
+    if(b === null) {
+        errorDisplay.textContent = 'ERROR';
+        numberKeys.forEach((key) => {
+            key.removeEventListener('click', storeA, false);
+            key.removeEventListener('click', storeB, false);
+        });
+        operators.forEach((operator) => {
+            operator.removeEventListener('click', storeFirstOperator, false);
+        });
+    } else if (c === null) {
+        const calculate = operations[firstOperator];
+        c = calculate(a,b);
+        display.textContent = c;
+        topDisplay.textContent = `${c} ${this.textContent}`;
+        numberKeys.forEach((key) => {
+            key.removeEventListener('click', storeA, false);
+            key.removeEventListener('click', storeB, false);
+        });
+    } else {
+        const calculate = operations[firstOperator];
+        c = calculate(c,b);
+        a = c;
+        b = 0;
+        display.textContent = c;
+        topDisplay.textContent = `${c} ${this.textContent}`;
+        operators.forEach((operator) => {
+            operator.removeEventListener('click', storeNextOperator, false);
+        });
+        numberKeys.forEach((key) => {
+            key.removeEventListener('click', storeA, false);
+            key.removeEventListener('click', storeB, false);
+            key.removeEventListener('click', storeNextB, false);
+        });
+        listenForOperator();
+    }
 }
 
 clearButton();
