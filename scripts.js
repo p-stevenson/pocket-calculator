@@ -6,7 +6,7 @@ let secondOperator;
 
 const display = document.querySelector('.screen5');
 const topDisplay = document.querySelector('.screen4');
-const errorDisplay = document.querySelector('.screen1');
+const errorDisplay = document.querySelector('.screen4');
 const decimalKey = document.querySelector('.decimal');
 const equals = document.querySelector('.equals');
 const numberKeys = document.querySelectorAll('.numeral');
@@ -109,7 +109,6 @@ function listenForSecondOperator() {
     });
 }
 
-
 function storeSecondOperator() {
     decimalKey.removeEventListener('click', displayDecimal, false);
     numberKeys.forEach((key) => {
@@ -121,8 +120,8 @@ function storeSecondOperator() {
         secondOperator = this.value;
         const calculate = operations[firstOperator];
         c = calculate(a,b);
-        display.textContent = c;
-        topDisplay.textContent = `${c} ${this.textContent}`;  
+        topDisplay.textContent = `${parseFloat(c.toFixed(4))} ${this.textContent}`;  
+        displayResult();
         firstOperator = secondOperator;
     }
     listenForNextB();
@@ -176,8 +175,8 @@ function storeNextOperator() {
         secondOperator = this.value;
         const calculate = operations[firstOperator];
         c = calculate(c,b);
-        display.textContent = c;
-        topDisplay.textContent = `${c} ${this.textContent}`;
+        topDisplay.textContent = `${parseFloat(c.toFixed(4))} ${this.textContent}`;
+        displayResult();
         firstOperator = secondOperator;
         listenForNextB();  
     }
@@ -198,7 +197,7 @@ function listenForOperator() {
 
 function storeOperatorAfterEquals() {
     firstOperator = this.value;
-    topDisplay.textContent = `${c} ${this.textContent}`;
+    topDisplay.textContent = `${parseFloat(c.toFixed(4))} ${this.textContent}`;
     decimalKey.removeEventListener('click', displayDecimal, false);
     listenForNextB();
 }
@@ -221,8 +220,8 @@ function doEquals() {
     } else if (c === null) {
         const calculate = operations[firstOperator];
         c = calculate(a,b);
-        display.textContent = c;
-        topDisplay.textContent = `${c} ${this.textContent}`;
+        topDisplay.textContent = `${parseFloat(c.toFixed(4))} ${this.textContent}`;
+        displayResult();
         numberKeys.forEach((key) => {
             key.removeEventListener('click', storeA, false);
             key.removeEventListener('click', storeB, false);
@@ -233,8 +232,8 @@ function doEquals() {
         c = calculate(c,b);
         a = c;
         b = 0;
-        display.textContent = c;
-        topDisplay.textContent = `${c} ${this.textContent}`;
+        topDisplay.textContent = `${parseFloat(c.toFixed(4))} ${this.textContent}`;
+        displayResult();
         operators.forEach((operator) => {
             operator.removeEventListener('click', storeNextOperator, false);
         });
@@ -258,8 +257,15 @@ function displayDecimal() {
     }
 }
 
+function displayResult() {
+    display.textContent = parseFloat(c.toFixed(4));
+    if(display.textContent.length > 10) {
+        clearScreen();
+        errorDisplay.textContent = 'ERROR';
+    }
+}
+
 clearButton();
 listenForA();
 listenForEquals();
 listenForDecimal();
-
