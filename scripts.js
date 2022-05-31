@@ -45,6 +45,7 @@ function clear() {
     errorDisplay.textContent = '';
     document.querySelector('.clear').removeEventListener('click', clear, false);
     clearButton();
+    listenForDecimal();
     listenForA();
 }
 
@@ -74,6 +75,7 @@ function listenForFirstOperator() {
 }
 
 function storeFirstOperator() {
+    decimalKey.removeEventListener('click', displayDecimal, false);
     numberKeys.forEach((key) => {
         key.removeEventListener('click', storeA, false)
     });
@@ -90,6 +92,7 @@ function listenForB() {
     numberKeys.forEach((key) => {
         key.addEventListener('click', storeB, false);
     });
+    listenForDecimal();
 }
 
 function storeB() {
@@ -108,6 +111,7 @@ function listenForSecondOperator() {
 
 
 function storeSecondOperator() {
+    decimalKey.removeEventListener('click', displayDecimal, false);
     numberKeys.forEach((key) => {
         key.removeEventListener('click', storeB, false);
     });
@@ -136,6 +140,7 @@ function listenForNextB() {
         key.addEventListener('click', clearScreenAndStopListening, {once:true});
         key.addEventListener('click', storeNextB, false);
     });
+    listenForDecimal();
 }
 
 function storeNextB() {
@@ -160,6 +165,7 @@ function listenForNextOperator() {
 }
 
 function storeNextOperator() {
+    decimalKey.removeEventListener('click', displayDecimal, false);
     numberKeys.forEach((key) => {
         key.removeEventListener('click', storeNextB, false);
     });
@@ -193,6 +199,7 @@ function listenForOperator() {
 function storeOperatorAfterEquals() {
     firstOperator = this.value;
     topDisplay.textContent = `${c} ${this.textContent}`;
+    decimalKey.removeEventListener('click', displayDecimal, false);
     listenForNextB();
 }
 
@@ -210,6 +217,7 @@ function doEquals() {
         operators.forEach((operator) => {
             operator.removeEventListener('click', storeFirstOperator, false);
         });
+        decimalKey.removeEventListener('click', displayDecimal, false);
     } else if (c === null) {
         const calculate = operations[firstOperator];
         c = calculate(a,b);
@@ -219,6 +227,7 @@ function doEquals() {
             key.removeEventListener('click', storeA, false);
             key.removeEventListener('click', storeB, false);
         });
+        decimalKey.removeEventListener('click', displayDecimal, false);
     } else {
         const calculate = operations[firstOperator];
         c = calculate(c,b);
@@ -234,11 +243,23 @@ function doEquals() {
             key.removeEventListener('click', storeB, false);
             key.removeEventListener('click', storeNextB, false);
         });
+        decimalKey.removeEventListener('click', displayDecimal, false);
         listenForOperator();
+    }
+}
+
+function listenForDecimal() {
+    decimalKey.addEventListener('click', displayDecimal, {once:true});
+}
+
+function displayDecimal() {
+    if(display.textContent.length < 9){
+        display.textContent += this.value;
     }
 }
 
 clearButton();
 listenForA();
 listenForEquals();
+listenForDecimal();
 
