@@ -26,6 +26,7 @@ function clearButton() {
         key.removeEventListener('click', storeNextB, false);
     });
     operators.forEach((operator) => {
+        operator.removeEventListener('click', storeOperatorAfterEquals, false);
         operator.removeEventListener('click', storeFirstOperator, false);
         operator.removeEventListener('click', storeSecondOperator, false);
         operator.removeEventListener('click', storeNextOperator, false);
@@ -129,6 +130,7 @@ function listenForNextB() {
     operators.forEach((operator) => {
         operator.removeEventListener('click', storeSecondOperator, false);
         operator.removeEventListener('click', storeNextOperator, false);
+        operator.removeEventListener('click', storeOperatorAfterEquals, false);
     });
     numberKeys.forEach((key) => {
         key.addEventListener('click', clearScreenAndStopListening, {once:true});
@@ -184,11 +186,11 @@ function storeNextOperator() {
 
 function listenForOperator() {
     operators.forEach((operator) => {
-        operator.addEventListener('click', storeOperator, false);
+        operator.addEventListener('click', storeOperatorAfterEquals, false);
     });
 }
 
-function storeOperator() {
+function storeOperatorAfterEquals() {
     firstOperator = this.value;
     topDisplay.textContent = `${c} ${this.textContent}`;
     listenForNextB();
