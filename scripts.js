@@ -272,7 +272,6 @@ function displayResult() {
 window.addEventListener('keydown', onKeyPress, false);
 
 function onKeyPress(e) {
-    e.preventDefault();
     document.querySelector(`button[data-key="${e.keyCode}"]`).click();
 }
 
