@@ -1,6 +1,8 @@
 @font-face {
     font-family: digital7;
-    src: url(fonts/digital-7/digital-7.ttf);
+    /* src: url(fonts/digital_7/digital-7m.ttf); */
+    src: url(fonts/ds_digital/DS-DIGI.TTF);
+    /* src: url(fonts/modern_lcd_7/modern_lcd-7.ttf); */
 }
 * {
     border: solid 5px black;
@@ -173,7 +175,7 @@ body {
     grid-column: 1 / -1;
     grid-row: 2;
     font-family: 'digital7';
-    font-size: 7.3vh;
+    font-size: 7vh;
     justify-self: end;
     align-self: center;
     padding-right: 2%;
