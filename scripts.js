@@ -17,6 +17,8 @@ const operations = {
     'subtract':(a, b) => a - b,
     'multiply':(a, b) => a * b,
     'divide':(a, b) => a / b,
+    // 'TAX-':(c) => c / 100 * 80,
+    // 'TAX+':(c) => c / 100 * 120,
 }
 
 function clearButton() {
@@ -247,6 +249,7 @@ function doEquals() {
     }
 }
 
+//------------------- DECIMALS ---------------------//
 function listenForDecimal() {
     decimalKey.addEventListener('click', displayDecimal, {once:true});
 }
@@ -263,6 +266,14 @@ function displayResult() {
         clearScreen();
         errorDisplay.textContent = 'ERROR';
     }
+}
+
+//------------------- KEYBOARD INPUT ---------------------//
+window.addEventListener('keydown', onKeyPress, false);
+
+function onKeyPress(e) {
+    e.preventDefault();
+    document.querySelector(`button[data-key="${e.keyCode}"]`).click();
 }
 
 clearButton();
