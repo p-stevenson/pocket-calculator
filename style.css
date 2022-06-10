@@ -1,182 +1,187 @@
 @font-face {
-    font-family: digital7;
-    /* src: url(fonts/digital_7/digital-7m.ttf); */
-    src: url(fonts/ds_digital/DS-DIGI.TTF);
-    /* src: url(fonts/modern_lcd_7/modern_lcd-7.ttf); */
+  font-family: digital7;
+  src: url(fonts/digital_7/digital-7-webfont.woff);
 }
+
 * {
-    border: solid 5px black;
-    background-color: rgba(168, 161, 161, 1);
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
+  border: solid 5px black;
+  background-color: rgba(168, 161, 161, 1);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
 }
 
 html {
-    border: none;
+  border: none;
 }
 
 body {
-    border-color: #f9005c;
-    height: 100vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  border-color: #f9005c;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .container {
-    border: 3px solid black;
-    border-radius: 40px;
-    background-color: silver;
-    box-shadow: 0 3px .5rem rgba(66, 66, 66, 0.844);
-    display: grid;
-    grid-template-rows: 1fr 62%;
-    max-height: 875px;
-    max-width: 515px;
-    height: 100%;
-    width: 100%;
-    padding: 10px;
+  border: 3px solid black;
+  border-radius: 40px;
+  background-color: silver;
+  box-shadow: 0 3px 0.5rem rgba(66, 66, 66, 0.844);
+  display: grid;
+  grid-template-rows: 1fr 62%;
+  max-height: 875px;
+  max-width: 515px;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
 }
 
 .keypad {
-    border: none;
-    background: none;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr) ;
-    grid-template-rows: 10% repeat(5, 1fr);
-    justify-items: space-around;
-    gap: 1em;
-    padding: .7rem;
+  border: none;
+  background: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 10% repeat(5, 1fr);
+  justify-items: space-around;
+  gap: 1em;
+  padding: 0.7rem;
 }
 
 .keypad #modelNo {
-    border: none;
-    background: none;
-    grid-column: span 2;
-    justify-self: center;
-    align-self: center;
-    font-family: 'Michroma', sans-serif;
-    font-weight: bold;
-    font-size: 1.5vh;
+  border: none;
+  background: none;
+  grid-column: span 2;
+  justify-self: center;
+  align-self: center;
+  font-family: "Michroma", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
 }
 .button {
-    border: .35vh solid black;
-    border-radius: 10px 10px 20px 20px;
-    background-color: rgb(225, 227, 230);
-    box-shadow: 0 3px /* .1rem */ rgba(66, 66, 66, 0.644);
-    font-family: 'Open Sans', sans-serif;
-    font-size: 2.5vh;
+  border: 0.35vh solid black;
+  border-radius: 10px 10px 20px 20px;
+  background-color: rgb(225, 227, 230);
+  box-shadow: 0 3px /* .1rem */ rgba(66, 66, 66, 0.644);
+  font-family: "Open Sans", sans-serif;
+  font-size: 2.5vh;
 }
 
 .button:active {
-    background-color: #ffd900;
-    box-shadow: 0 2px rgba(66, 66, 66, 0.644);
-    transform: translateY(4px);
+  background-color: #ffd900;
+  box-shadow: 0 2px rgba(66, 66, 66, 0.644);
+  transform: translateY(4px);
 }
 
 .button1 {
-    grid-column: 4;
+  grid-column: 4;
 }
 
-.button1, .button2 {
-    background-color: rgb(83, 197, 193);
-    font-size: 2.3vh;
+.button1,
+.button2 {
+  background-color: rgb(83, 197, 193);
+  font-size: 2.3vh;
 }
 
-.button3, .button8 {
-    font-size: 2.2vh;
+.button3,
+.button8 {
+  font-size: 2.2vh;
 }
 
-.button18, .button23 {
-    background-color: rgb(231, 99, 172);
+.button18,
+.button23 {
+  background-color: rgb(231, 99, 172);
 }
 
 .button22 {
-    grid-row: span 2;
+  grid-row: span 2;
 }
 
 .panels {
-    border: none;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 1fr 3fr;
-    background-color: silver;
+  border: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 3fr;
+  background-color: silver;
 }
 
 .panels #logo {
-    border: none;
-    background: none;
-    font-family: 'Michroma', sans-serif;
-    font-weight: bold;
-    font-size: 2.3vh;
-    grid-column: span 2;
-    justify-self: start;
-    align-self: center;
-    margin: 0 0 0 12%;
+  border: none;
+  background: none;
+  font-family: "Michroma", sans-serif;
+  font-weight: bold;
+  font-size: 2.3vh;
+  grid-column: span 2;
+  justify-self: start;
+  align-self: center;
+  margin: 0 0 0 12%;
 }
 
 .solar {
-    border: 5px double;
-    border-radius: 3%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column: 3 / span 2;
-    height: 4vh;
-    align-self: center;
-    margin: 0% 10% 0% 8%;
+  border: 5px double;
+  border-radius: 3%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column: 3 / span 2;
+  height: 4vh;
+  align-self: center;
+  margin: 0% 10% 0% 8%;
 }
 
 .solarPanel {
-    border: none;
-    outline: solid rgba(218, 165, 32, 0.226);
-    background-color: rgb(72, 30, 11);
+  border: none;
+  outline: solid rgba(218, 165, 32, 0.226);
+  background-color: rgb(72, 30, 11);
 }
 
 .main {
-    border: solid black 2px;
-    border-radius: 20px;
-    grid-row: 2;
-    grid-column: span 4;
-    flex: 2 1 auto;
-    display: flex;
-    margin: 2%;
+  border: solid black 2px;
+  border-radius: 20px;
+  grid-row: 2;
+  grid-column: span 4;
+  flex: 2 1 auto;
+  display: flex;
+  margin: 2%;
 }
 
 .mainDisplay {
-    display: grid;
-    border: 5px double;
-    border-radius: 20px;
-    background-color: rgb(170,189,177);
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 20% 1fr;
-    margin: 3%;
-    flex: 1 1 auto;
+  display: grid;
+  border: 5px double;
+  border-radius: 20px;
+  background-color: rgb(170, 189, 177);
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 20% 1fr;
+  margin: 3%;
+  flex: 1 1 auto;
 }
-.screen1, .screen2, .screen3, .screen4 {
-    border: none;
-    background: none;
-    align-self: center;
-    justify-self: center;
-    font-family: 'Michroma', sans-serif;
-    font-weight: bold;
-    font-size: 1.3vh;
+.screen1,
+.screen2,
+.screen3,
+.screen4 {
+  border: none;
+  background: none;
+  align-self: center;
+  justify-self: center;
+  font-family: "Michroma", sans-serif;
+  font-weight: bold;
+  font-size: 1.3vh;
 }
 .screen1 {
-    padding-left: 20%;
+  padding-left: 20%;
 }
 .screen4 {
-    grid-column: span 2;
+  grid-column: span 2;
 }
 .screen5 {
-    border: none;
-    background: none;
-    grid-column: 1 / -1;
-    grid-row: 2;
-    font-family: 'digital7';
-    font-size: 7vh;
-    justify-self: end;
-    align-self: center;
-    padding-right: 2%;
+  border: none;
+  background: none;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-family: "digital7";
+  font-size: 7vh;
+  justify-self: end;
+  align-self: center;
+  padding-right: 2%;
 }
