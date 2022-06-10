@@ -1,6 +1,7 @@
 @font-face {
   font-family: digital7;
-  src: url(fonts/digital_7/digital-7-webfont.woff);
+  src: url("fonts/digital_7/digital-7-webfont.woff") format("woff"),
+    url("fonts/digital_7/digital-7-webfont.woff2") format("woff2");
 }
 
 * {
