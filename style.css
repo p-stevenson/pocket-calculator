@@ -76,27 +76,27 @@ body {
   transform: translateY(4px);
 }
 
-.button1 {
+#button1 {
   grid-column: 4;
 }
 
-.button1,
-.button2 {
+#button1,
+#button2 {
   background-color: rgb(83, 197, 193);
   font-size: 2.3vh;
 }
 
-.button3,
-.button8 {
+#button3,
+#button8 {
   font-size: 2.2vh;
 }
 
-.button18,
-.button23 {
+#clear,
+#button23 {
   background-color: rgb(231, 99, 172);
 }
 
-.button22 {
+#button22 {
   grid-row: span 2;
 }
 
@@ -157,11 +157,11 @@ body {
   margin: 3%;
   flex: 1 1 auto;
 }
-.screen1,
-.screen2,
-.screen3,
-.screen4 {
-  border: none;
+#screen1,
+#screen2,
+#screen3,
+#screen4 {
+  border: 2px solid black;
   background: none;
   align-self: center;
   justify-self: center;
@@ -169,14 +169,14 @@ body {
   font-weight: bold;
   font-size: 1.3vh;
 }
-.screen1 {
+#screen1 {
   padding-left: 20%;
 }
-.screen4 {
+#screen4 {
   grid-column: span 2;
 }
-.screen5 {
-  border: none;
+#screen5 {
+  border: 2px solid black;
   background: none;
   grid-column: 1 / -1;
   grid-row: 2;
