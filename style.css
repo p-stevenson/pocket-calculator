@@ -76,27 +76,27 @@ body {
   transform: translateY(4px);
 }
 
-#button1 {
+.button[value="TAX-"] {
   grid-column: 4;
 }
 
-#button1,
-#button2 {
+.button[value="TAX-"],
+.button[value="TAX+"] {
   background-color: rgb(83, 197, 193);
   font-size: 2.3vh;
 }
 
-#button3,
-#button8 {
-  font-size: 2.2vh;
+.button[value="MRC"],
+.button[value="M/EX"] {
+  font-size: 2vh;
 }
 
-#clear,
-#button23 {
+.button[value="clear"],
+.button[value="AC"] {
   background-color: rgb(231, 99, 172);
 }
 
-#button22 {
+.button[value="+"] {
   grid-row: span 2;
 }
 
